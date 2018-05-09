@@ -1,0 +1,44 @@
+﻿@using OthelloModel
+@using WebApplication1.Controllers;
+
+@Model OthelloGame
+@{
+    ViewBag.Title = "Home Page";
+    OthelloGame game = Model;
+}
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        @for (char c = 'A'; c <= 'H'; c++)
+        {
+            <th scope="col">@c</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @for (int row = 1; row <= 8; row++)
+    {
+        <tr>
+            <th scope="row">@row</th>
+            @for (int col = 1; col <= 8; col++)
+            {
+                <td>
+                    @if (game.board[row-1, col-1] == GamePiece.Blank)
+                    {
+                        @Html.ActionLink("___","Move", new {row = row-1, col = col - 1})
+                    }
+                    else
+                    {
+                        @game.board[row -1, col - 1].ToChar();
+                    }
+                        
+                    
+               </td>
+            }
+        </tr>
+    }
+       
+    </tbody>
+</table>
