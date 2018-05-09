@@ -35,6 +35,10 @@ namespace WebApplication1.Controllers
 
         public ActionResult Move(int row, int col)
         {
+            if (row < 0 || col < 0)
+            {
+                RedirectToAction("Error");
+            }
             Game.OthelloGame.Move(row, col);
 
             return RedirectToAction("Index");
@@ -44,6 +48,11 @@ namespace WebApplication1.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Error()
+        {
             return View();
         }
     }
